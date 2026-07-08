@@ -1,0 +1,13 @@
+﻿# Videos - too large for GitHub
+*.mp4
+*.MP4
+*.mov
+*.avi
+
+# Node
+node_modules/
+package-lock.json
+
+# System
+.DS_Store
+Thumbs.db

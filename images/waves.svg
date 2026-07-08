@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 800" preserveAspectRatio="none">
+  <!-- Layer 1: Deepest layer - warm sand -->
+  <path d="M0,400 C180,340 360,480 540,400 C720,320 900,460 1080,400 C1260,340 1440,450 1440,400 L1440,800 L0,800 Z" fill="#EDE0D0" opacity="0.55"/>
+  <!-- Layer 2: Terracotta wave -->
+  <path d="M0,420 C200,350 400,490 600,420 C800,350 1000,470 1200,420 C1350,390 1440,430 1440,420 L1440,800 L0,800 Z" fill="#D4A88A" opacity="0.50"/>
+  <!-- Layer 3: Rose wave -->
+  <path d="M0,450 C220,380 440,510 660,450 C880,390 1100,500 1320,450 C1380,430 1440,460 1440,450 L1440,800 L0,800 Z" fill="#D4A8A8" opacity="0.45"/>
+  <!-- Layer 4: Amber wave -->
+  <path d="M0,480 C240,410 480,530 720,480 C960,430 1200,520 1440,480 L1440,800 L0,800 Z" fill="#D4BFA0" opacity="0.42"/>
+  <!-- Layer 5: Gold wave -->
+  <path d="M0,510 C260,440 520,550 780,510 C1040,470 1300,540 1440,510 L1440,800 L0,800 Z" fill="#C9B380" opacity="0.35"/>
+  <!-- Layer 6: Light terracotta -->
+  <path d="M0,540 C280,470 560,570 840,540 C1120,510 1380,560 1440,540 L1440,800 L0,800 Z" fill="#E0A88A" opacity="0.30"/>
+</svg>

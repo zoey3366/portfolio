@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#3D2C2E"/>
+      <stop offset="50%" style="stop-color:#2C1F21"/>
+      <stop offset="100%" style="stop-color:#4A2A2A"/>
+    </linearGradient>
+    <filter id="glow"><feGaussianBlur stdDeviation="3" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  </defs>
+  <rect width="800" height="450" fill="url(#bg)"/>
+  <!-- Display stand / retail vibe -->
+  <rect x="280" y="80" width="240" height="250" fill="none" stroke="#C97B5B" stroke-width="1.2" opacity="0.35" rx="6"/>
+  <rect x="250" y="70" width="300" height="270" fill="none" stroke="#BE9D6A" stroke-width="0.7" opacity="0.2" rx="8"/>
+  <!-- Price tag shape hint -->
+  <rect x="250" y="160" width="300" height="3" fill="#C97B5B" opacity="0.25"/>
+  <rect x="250" y="290" width="300" height="3" fill="#C97B5B" opacity="0.25"/>
+  <!-- Center icon: spotlight / product -->
+  <circle cx="400" cy="205" r="50" fill="none" stroke="#BE9D6A" stroke-width="1.5" opacity="0.4"/>
+  <circle cx="400" cy="205" r="60" fill="none" stroke="#C97B5B" stroke-width="1" opacity="0.25" stroke-dasharray="8,6"/>
+  <!-- Star burst for POP feel -->
+  <g fill="#BE9D6A" opacity="0.3">
+    <polygon points="400,130 405,145 420,145 408,155 412,170 400,160 388,170 392,155 380,145 395,145"/>
+  </g>
+  <!-- Text -->
+  <text x="400" y="310" text-anchor="middle" fill="#EDE0D0" font-family="Georgia,serif" font-size="26" letter-spacing="5" opacity="0.85">POP</text>
+  <text x="400" y="342" text-anchor="middle" fill="#C97B5B" font-family="Georgia,serif" font-size="13" letter-spacing="3" opacity="0.7">ADVERTISING</text>
+  <!-- Bottom accent -->
+  <line x1="330" y1="360" x2="470" y2="360" stroke="#B87A7A" stroke-width="0.6" opacity="0.3"/>
+</svg>
