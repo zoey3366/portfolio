@@ -1,8 +1,8 @@
-﻿# Videos - too large for GitHub
-*.mp4
-*.MP4
-*.mov
-*.avi
+﻿# Videos - keep compressed versions under 100MB for GitHub
+# *.mp4
+# *.MP4
+# *.mov
+# *.avi
 
 # Node
 node_modules/
