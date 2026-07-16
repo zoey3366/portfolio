@@ -1,0 +1,1082 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jiaqi Zhang — 访谈制作人 · Interview Producer</title>
+<style>
+/* ============================================================
+   PORTFOLIO — Jiaqi Zhang
+   访谈制作人 · Interview Producer
+   ============================================================ */
+
+/* ----- Reset & Variables ----- */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+  --cream:#FCF7F0;
+  --warm-bg:#F9F1E6;
+  --paper:#FDF8F2;
+  --terracotta:#C97B5B;
+  --terracotta-deep:#A85D3F;
+  --terracotta-light:#E0A88A;
+  --rose:#B87A7A;
+  --rose-pale:#E4CCCC;
+  --umber:#8B5E4B;
+  --sand:#DCC8A8;
+  --sand-light:#EDE0D0;
+  --gold:#BE9D6A;
+  --gold-light:#D4BFA0;
+  --ink:#2C1F21;
+  --ink-soft:#4A3A3C;
+  --ink-muted:#7B6B6D;
+  --white:#FFFCF8;
+  --border-warm:rgba(183,122,122,0.18);
+  --border-gold:rgba(190,157,106,0.25);
+  --shadow-sm:0 2px 12px rgba(44,31,33,0.05);
+  --shadow-md:0 6px 30px rgba(44,31,33,0.10);
+  --shadow-lg:0 12px 50px rgba(44,31,33,0.14);
+  --shadow-warm:0 8px 40px rgba(183,122,122,0.13);
+  --radius-xs:6px;--radius-sm:10px;--radius:18px;--radius-lg:24px;
+  --ease:0.45s cubic-bezier(0.23,0.54,0.19,1);
+  --ease-slow:0.7s cubic-bezier(0.23,0.54,0.19,1);
+}
+
+html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
+
+/* ============================================================
+   WAVE TEXTURE SYSTEM
+   ============================================================ */
+body{
+  font-family:'Georgia','Noto Serif SC','Source Han Serif SC',serif;
+  background:var(--cream);color:var(--ink);line-height:1.8;
+  overflow-x:hidden;font-size:16px;
+  position:relative;
+}
+body::before{
+  content:'';position:fixed;inset:0;pointer-events:none;z-index:99998;
+  opacity:0.025;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-repeat:repeat;background-size:256px 256px;
+}
+
+/* ----- Animated Wave Bars ----- */
+.wave-ribbon{
+  position:absolute;width:110%;left:-5%;height:80px;pointer-events:none;z-index:0;
+  background-repeat:repeat-x;
+  animation:waveSlide 8s ease-in-out infinite;
+}
+@keyframes waveSlide{
+  0%,100%{transform:translateX(0)}
+  50%{transform:translateX(25px)}
+}
+
+.hero-waves{position:absolute;bottom:0;left:0;right:0;height:320px;pointer-events:none;z-index:1;overflow:hidden}
+.hero-waves svg{position:absolute;bottom:0;left:0;width:100%;height:100%}
+.hero-wave-inner{position:relative;width:200%;height:100%;animation:waveDrift 14s ease-in-out infinite}
+@keyframes waveDrift{0%,100%{transform:translateX(0)}50%{transform:translateX(-50%)}}
+
+.section-waves{position:absolute;inset:0;pointer-events:none;z-index:0;opacity:0.75;overflow:hidden}
+.section-waves svg{position:absolute;bottom:0;left:0;width:100%;height:100%}
+#about .section-waves{opacity:0.55}
+#works .section-waves{opacity:0.6}
+#skills .section-waves{opacity:0.45}
+#contact .section-waves{opacity:0.5}
+
+::selection{background:rgba(201,123,91,0.2);color:var(--ink)}
+
+/* ----- Typography ----- */
+h1,h2,h3,h4{font-weight:normal;letter-spacing:0.03em}
+h1{font-size:clamp(2.4rem,5.5vw,4.2rem);line-height:1.12}
+h2{font-size:clamp(1.7rem,3.5vw,2.5rem);line-height:1.2}
+h3{font-size:clamp(1.2rem,2vw,1.55rem);line-height:1.3}
+em,i{font-style:italic}
+.en{font-family:'Georgia','Times New Roman',serif;letter-spacing:0.02em}
+
+/* ----- Scroll Progress ----- */
+.scroll-bar{
+  position:fixed;top:0;left:0;height:3px;
+  background:linear-gradient(90deg,var(--terracotta),var(--rose),var(--gold));
+  z-index:10000;width:0%;transition:width 0.15s linear;
+}
+
+/* ----- Navigation ----- */
+.nav{
+  position:fixed;top:0;left:0;right:0;z-index:9999;
+  padding:1.1rem 2.2rem;display:flex;justify-content:space-between;align-items:center;
+  transition:all 0.4s ease;
+}
+.nav.on{
+  background:rgba(252,247,240,0.88);backdrop-filter:blur(16px);
+  -webkit-backdrop-filter:blur(16px);
+  box-shadow:0 1px 20px rgba(44,31,33,0.06);
+  padding:0.75rem 2.2rem;
+}
+.nav-home{font-size:1.2rem;font-weight:bold;color:var(--ink);text-decoration:none;letter-spacing:3px}
+.nav-links{display:flex;gap:2.2rem;list-style:none}
+.nav-links a{text-decoration:none;color:var(--ink-soft);font-size:0.88rem;letter-spacing:1.5px;transition:color 0.3s}
+.nav-links a:hover{color:var(--terracotta)}
+@media(max-width:768px){.nav{padding:1rem 1.2rem}.nav-links{display:none}}
+
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero{
+  min-height:100vh;display:flex;align-items:center;justify-content:center;
+  padding:6rem 2rem 3rem;position:relative;overflow:hidden;
+}
+.hero-bg-layer{position:absolute;inset:0;pointer-events:none}
+.hero-orb{
+  position:absolute;border-radius:50%;filter:blur(90px);opacity:0.45;
+  animation:orbFloat 16s ease-in-out infinite;
+}
+.hero-orb.a{width:520px;height:520px;top:-15%;left:-8%;background:radial-gradient(circle,rgba(201,123,91,0.25),transparent 70%);animation-delay:0s}
+.hero-orb.b{width:400px;height:400px;top:40%;right:-10%;background:radial-gradient(circle,rgba(184,122,122,0.20),transparent 70%);animation-delay:-6s}
+.hero-orb.c{width:340px;height:340px;bottom:-5%;left:30%;background:radial-gradient(circle,rgba(190,157,106,0.18),transparent 70%);animation-delay:-10s}
+@keyframes orbFloat{
+  0%,100%{transform:translate(0,0) scale(1)}
+  25%{transform:translate(3%,-2%) scale(1.06)}
+  50%{transform:translate(-1%,2%) scale(0.95)}
+  75%{transform:translate(-2%,-1%) scale(1.03)}
+}
+
+.hero-inner{text-align:center;position:relative;z-index:2;max-width:720px}
+.hero-overline{
+  display:inline-block;font-size:0.78rem;letter-spacing:5px;text-transform:uppercase;
+  color:var(--terracotta);padding:0.35rem 1.3rem;
+  border:1px solid rgba(201,123,91,0.3);border-radius:50px;
+  margin-bottom:2.2rem;backdrop-filter:blur(4px);
+  background:rgba(255,248,240,0.35);
+}
+.hero h1{color:var(--ink);margin-bottom:0.6rem}
+.hero h1 .accent{color:var(--terracotta)}
+.hero .role-line{
+  font-size:1.05rem;color:var(--ink-soft);margin-bottom:0.8rem;letter-spacing:2px;line-height:1.7;
+}
+.hero .edu-line{font-size:0.95rem;color:var(--ink-muted);margin-bottom:2.2rem;letter-spacing:1.5px;line-height:1.7}
+.hero-divider{width:50px;height:1.5px;background:var(--terracotta);margin:0 auto 2rem;opacity:0.5}
+.hero-keywords{
+  display:flex;gap:0.7rem;justify-content:center;flex-wrap:wrap;margin-bottom:2rem;
+}
+.hero-keywords span{
+  padding:0.35rem 1rem;font-size:0.78rem;letter-spacing:1.5px;
+  background:rgba(201,123,91,0.06);border:1px solid rgba(201,123,91,0.18);
+  border-radius:50px;color:var(--terracotta);
+}
+.hero-contact{
+  display:flex;gap:1.8rem;justify-content:center;flex-wrap:wrap;
+  font-size:0.82rem;color:var(--ink-muted);letter-spacing:1px;
+}
+.hero-contact span{display:inline-flex;align-items:center;gap:0.4rem}
+.hero-scroll{margin-top:3.5rem;display:flex;flex-direction:column;align-items:center;gap:0.4rem;color:var(--terracotta);font-size:0.72rem;letter-spacing:3px}
+.hero-scroll .arr{width:18px;height:18px;border-right:1.5px solid var(--terracotta);border-bottom:1.5px solid var(--terracotta);transform:rotate(45deg);animation:arrBounce 1.6s ease-in-out infinite}
+@keyframes arrBounce{0%,100%{transform:rotate(45deg)translate(0,0);opacity:0.4}50%{transform:rotate(45deg)translate(3px,3px);opacity:1}}
+
+/* ============================================================
+   SECTION COMMON
+   ============================================================ */
+section{padding:5rem 2rem}
+@media(max-width:768px){section{padding:3.5rem 1.2rem}}
+.container{max-width:1120px;margin:0 auto}
+
+.s-head{text-align:center;margin-bottom:4.5rem}
+.s-head .num{display:block;font-size:0.75rem;letter-spacing:4px;color:var(--terracotta);text-transform:uppercase;margin-bottom:0.6rem}
+.s-head h2{color:var(--ink);margin-bottom:0.6rem}
+.s-head .line{width:40px;height:1.5px;background:var(--terracotta);margin:0 auto;opacity:0.45}
+.s-head .sub{color:var(--ink-muted);margin-top:0.8rem;font-size:0.92rem;letter-spacing:1px}
+
+/* ============================================================
+   ABOUT SECTION
+   ============================================================ */
+#about{background:var(--paper);position:relative;overflow:hidden}
+#about .container{position:relative;z-index:1}
+
+.info-grid{
+  display:grid;grid-template-columns:1fr 1.5fr;gap:4rem;align-items:start;
+}
+@media(max-width:900px){.info-grid{grid-template-columns:1fr;gap:2.5rem}}
+
+.info-visual{
+  border-radius:var(--radius-lg);overflow:hidden;
+  box-shadow:var(--shadow-lg);aspect-ratio:4/5;
+  display:flex;align-items:center;justify-content:center;
+  position:relative;
+}
+.info-visual img{
+  width:100%;height:100%;object-fit:contain;display:block;
+  background:linear-gradient(160deg,#C97B5B 0%,#B87A7A 40%,#BE9D6A 100%);
+}
+.info-visual .visual-tag{
+  position:absolute;bottom:1.5rem;left:1.5rem;right:1.5rem;
+  font-size:0.78rem;color:rgba(255,255,255,0.85);letter-spacing:3px;
+  text-align:center;border-top:1px solid rgba(255,255,255,0.3);padding-top:1rem;
+  text-shadow:0 1px 4px rgba(0,0,0,0.3);
+}
+
+.info-text h3{color:var(--ink);margin-bottom:0.25rem}
+.info-text .cn-name{font-size:1.3rem;color:var(--terracotta);margin-bottom:1rem;letter-spacing:2px}
+.info-text .bio{color:var(--ink-soft);font-size:0.95rem;line-height:1.9}
+.info-text .bio+.bio{margin-top:0.8rem}
+
+.stat-row{display:flex;gap:1.8rem;margin-top:2rem;flex-wrap:wrap}
+.stat-item{
+  flex:1;min-width:120px;text-align:center;padding:1.2rem 1rem;
+  background:var(--white);border-radius:var(--radius-sm);
+  border:1px solid var(--border-warm);box-shadow:var(--shadow-sm);
+}
+.stat-item .num{font-size:2rem;color:var(--terracotta);font-family:'Georgia',serif;line-height:1}
+.stat-item .lbl{font-size:0.75rem;color:var(--ink-muted);margin-top:0.4rem;letter-spacing:1px}
+
+/* ============================================================
+   PIPELINE VISUAL — 访谈全流程
+   ============================================================ */
+.pipeline-row{
+  display:flex;gap:1rem;margin-top:2.5rem;flex-wrap:wrap;justify-content:center;
+}
+.pipeline-step{
+  flex:1;min-width:140px;max-width:200px;text-align:center;
+  padding:1.5rem 1rem;background:var(--white);border-radius:var(--radius);
+  border:1px solid var(--border-warm);box-shadow:var(--shadow-sm);
+  position:relative;transition:var(--ease);
+}
+.pipeline-step:hover{transform:translateY(-3px);box-shadow:var(--shadow-md)}
+.pipeline-step .ps-icon{font-size:1.8rem;margin-bottom:0.6rem}
+.pipeline-step .ps-title{font-size:0.85rem;color:var(--ink);letter-spacing:1px;font-weight:bold;margin-bottom:0.3rem}
+.pipeline-step .ps-desc{font-size:0.72rem;color:var(--ink-muted);line-height:1.5}
+.pipeline-step .ps-tag{
+  position:absolute;top:-10px;right:-10px;
+  background:var(--terracotta);color:#fff;font-size:0.65rem;
+  padding:0.2rem 0.6rem;border-radius:50px;letter-spacing:1px;
+}
+.pipeline-arrow{
+  display:flex;align-items:center;color:var(--terracotta-light);font-size:1.2rem;
+}
+@media(max-width:768px){.pipeline-arrow{display:none}}
+
+/* ============================================================
+   TIMELINE — Education & Internship
+   ============================================================ */
+.timeline-wrap{position:relative}
+.timeline-wrap::before{
+  content:'';position:absolute;left:50%;top:0;bottom:0;width:1px;
+  background:linear-gradient(to bottom,transparent,var(--border-warm) 10%,var(--border-warm) 90%,transparent);
+  transform:translateX(-50%);
+}
+@media(max-width:768px){.timeline-wrap::before{left:20px}}
+
+.tl-block{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start;margin-bottom:3rem}
+@media(max-width:768px){.tl-block{grid-template-columns:1fr;gap:1rem;padding-left:40px}}
+
+.tl-left{text-align:right;padding-right:2.5rem}
+@media(max-width:768px){.tl-left{text-align:left;padding-right:0}}
+.tl-right{padding-left:2.5rem}
+@media(max-width:768px){.tl-right{padding-left:0}}
+
+.tl-dot{
+  position:absolute;left:50%;transform:translateX(-50%);
+  width:11px;height:11px;border-radius:50%;
+  background:var(--terracotta);box-shadow:0 0 0 5px var(--cream),0 0 0 6px var(--terracotta-light);
+  margin-top:0.5rem;
+}
+@media(max-width:768px){.tl-dot{left:20px;transform:translateX(-50%)}}
+
+.tl-year{font-size:0.8rem;letter-spacing:3px;color:var(--terracotta);font-family:'Georgia',serif;margin-bottom:0.3rem}
+.tl-card{
+  background:var(--white);border:1px solid var(--border-warm);
+  border-radius:var(--radius);padding:1.6rem 1.8rem;
+  box-shadow:var(--shadow-sm);transition:var(--ease);
+}
+.tl-card:hover{box-shadow:var(--shadow-md);transform:translateY(-2px)}
+.tl-card h4{font-size:1.1rem;color:var(--ink);margin-bottom:0.2rem;letter-spacing:0.5px}
+.tl-card .where{font-size:0.85rem;color:var(--ink-muted);margin-bottom:0.5rem;letter-spacing:1px}
+.tl-card .where strong{color:var(--terracotta);font-weight:normal}
+.tl-card .desc{font-size:0.85rem;color:var(--ink-soft);line-height:1.7}
+.tl-card .tag-row{display:flex;flex-wrap:wrap;gap:0.4rem;margin-top:0.6rem}
+.tl-card .tag-row span{
+  padding:0.15rem 0.6rem;font-size:0.68rem;letter-spacing:1px;
+  background:rgba(201,123,91,0.05);border:1px solid var(--border-warm);
+  border-radius:50px;color:var(--terracotta);
+}
+
+/* ============================================================
+   WORKS SECTION
+   ============================================================ */
+#works{background:var(--warm-bg);position:relative;overflow:hidden}
+#works .container{position:relative;z-index:1}
+
+.work-category{margin-bottom:4rem}
+.work-cat-title{
+  font-size:0.8rem;letter-spacing:4px;color:var(--terracotta);
+  text-transform:uppercase;margin-bottom:2rem;padding-bottom:0.8rem;
+  border-bottom:1px solid var(--border-warm);
+  display:flex;align-items:center;gap:0.6rem;
+}
+.work-cat-title::after{content:'';flex:1;height:1px;background:var(--border-warm)}
+
+/* Featured work */
+.work-featured{
+  display:grid;grid-template-columns:1fr 1fr;gap:3.5rem;align-items:center;
+  margin-bottom:3.5rem;padding:2.5rem;
+  background:var(--white);border-radius:var(--radius-lg);
+  border:1px solid var(--border-warm);box-shadow:var(--shadow-warm);
+}
+.work-featured.alt{direction:rtl}
+.work-featured.alt .work-f-info{direction:ltr}
+@media(max-width:840px){.work-featured,.work-featured.alt{grid-template-columns:1fr;gap:2rem;direction:ltr;padding:1.5rem}.work-featured.alt .work-f-info{direction:ltr}}
+
+.work-f-visual{border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow-md);position:relative}
+.work-f-visual img{width:100%;height:340px;object-fit:cover;display:block;transition:0.6s ease}
+.work-f-visual:hover img{transform:scale(1.03)}
+.work-f-visual video{width:100%;border-radius:var(--radius);outline:none;aspect-ratio:16/9;object-fit:cover}
+.work-f-badge{
+  position:absolute;top:1rem;left:1rem;
+  background:rgba(255,248,240,0.92);color:var(--terracotta);
+  padding:0.25rem 0.9rem;border-radius:50px;font-size:0.72rem;
+  letter-spacing:2px;backdrop-filter:blur(6px);
+}
+
+.work-f-info .wnum{
+  font-size:4.5rem;color:var(--sand);line-height:1;margin-bottom:-1.2rem;
+  font-family:'Georgia',serif;font-style:italic;pointer-events:none;
+}
+.work-f-info h3{color:var(--ink);margin-bottom:0.15rem}
+.work-f-info .wrole{font-size:0.8rem;color:var(--terracotta);letter-spacing:2px;text-transform:uppercase;margin-bottom:1rem;display:block}
+.work-f-info .wdesc{color:var(--ink-soft);line-height:1.8;margin-bottom:0.8rem;font-size:0.92rem}
+.work-f-info .whighlight{
+  font-size:0.82rem;color:var(--terracotta);line-height:1.6;margin-bottom:1.2rem;
+  padding:0.6rem 1rem;background:rgba(201,123,91,0.04);border-left:2px solid var(--terracotta-light);border-radius:0 var(--radius-xs) var(--radius-xs) 0;
+}
+.work-f-info .whighlight strong{color:var(--ink);font-weight:normal}
+.work-f-tags{display:flex;flex-wrap:wrap;gap:0.5rem;margin-bottom:1.5rem}
+.work-f-tags span{padding:0.25rem 0.8rem;background:rgba(201,123,91,0.05);border:1px solid var(--border-warm);border-radius:50px;font-size:0.75rem;color:var(--ink-soft);letter-spacing:1px}
+
+.btn{
+  display:inline-flex;align-items:center;gap:0.4rem;padding:0.6rem 1.6rem;
+  text-decoration:none;border-radius:50px;font-size:0.85rem;letter-spacing:1px;
+  transition:var(--ease);cursor:pointer;font-family:inherit;border:none;
+}
+.btn-primary{background:var(--terracotta);color:#fff}
+.btn-primary:hover{background:var(--terracotta-deep);transform:translateY(-2px);box-shadow:0 6px 20px rgba(168,93,63,0.25)}
+.btn-outline{background:transparent;color:var(--terracotta);border:1px solid var(--terracotta)}
+.btn-outline:hover{background:var(--terracotta);color:#fff;transform:translateY(-2px)}
+.btn-ghost{background:transparent;color:var(--ink-soft);border:1px solid var(--border-warm)}
+.btn-ghost:hover{background:var(--white);color:var(--terracotta);border-color:var(--terracotta-light)}
+.btn-group{display:flex;gap:0.8rem;flex-wrap:wrap}
+
+/* ============================================================
+   SKILLS
+   ============================================================ */
+#skills{background:var(--cream);position:relative;overflow:hidden}
+#skills .container{position:relative;z-index:1}
+.skills-marquee{
+  display:flex;flex-wrap:wrap;gap:1rem;justify-content:center;max-width:900px;margin:0 auto;
+}
+.skill-pill{
+  padding:0.7rem 1.6rem;font-size:0.88rem;letter-spacing:1.5px;
+  background:var(--white);border:1px solid var(--border-warm);
+  border-radius:50px;color:var(--ink-soft);
+  transition:var(--ease);cursor:default;
+}
+.skill-pill:hover{background:var(--terracotta);color:#fff;border-color:var(--terracotta);transform:translateY(-2px);box-shadow:var(--shadow-md)}
+.skill-group{margin-bottom:2.5rem;text-align:center}
+.skill-group .sg-title{font-size:0.75rem;letter-spacing:3px;color:var(--terracotta);text-transform:uppercase;margin-bottom:1rem}
+.skill-group .sg-sub{font-size:0.8rem;color:var(--ink-muted);margin-bottom:1.2rem;letter-spacing:1px}
+
+/* ============================================================
+   CONTACT
+   ============================================================ */
+#contact{background:linear-gradient(180deg,var(--cream) 0%,var(--paper) 100%);text-align:center;position:relative;overflow:hidden}
+#contact .container{position:relative;z-index:1}
+.contact-card{
+  max-width:500px;margin:0 auto;padding:3rem 2rem;
+  background:var(--white);border-radius:var(--radius-lg);
+  border:1px solid var(--border-warm);box-shadow:var(--shadow-warm);
+}
+.contact-card .email{font-size:1.2rem;color:var(--ink);text-decoration:none;letter-spacing:1px;transition:color 0.3s;word-break:break-all}
+.contact-card .email:hover{color:var(--terracotta)}
+.contact-card .phone{font-size:1rem;color:var(--ink-muted);margin-top:0.8rem;letter-spacing:1px}
+.contact-links{display:flex;gap:1.2rem;justify-content:center;margin-top:1.8rem}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+footer{text-align:center;padding:3rem 2rem;font-size:0.8rem;color:var(--ink-muted);letter-spacing:1.5px}
+footer .fline{width:30px;height:1px;background:var(--terracotta);margin:0 auto 1.2rem;opacity:0.35}
+
+/* ============================================================
+   LIGHTBOX
+   ============================================================ */
+.lb{display:none;position:fixed;inset:0;background:rgba(28,18,18,0.94);z-index:99999;justify-content:center;align-items:center;cursor:pointer}
+.lb.on{display:flex}
+.lb img{max-width:92vw;max-height:92vh;border-radius:8px}
+.lb .close{position:absolute;top:2rem;right:2rem;color:#fff;font-size:2rem;width:44px;height:44px;display:flex;align-items:center;justify-content:center;border:1px solid rgba(255,255,255,0.25);border-radius:50%;transition:var(--ease);cursor:pointer}
+.lb .close:hover{background:rgba(255,255,255,0.1)}
+
+/* ============================================================
+   ANIMATIONS
+   ============================================================ */
+.fade-up{opacity:0;transform:translateY(32px);transition:opacity 0.75s ease,transform 0.75s cubic-bezier(0.23,0.54,0.19,1)}
+.fade-up.on{opacity:1;transform:translateY(0)}
+.delay-1{transition-delay:0.1s}.delay-2{transition-delay:0.2s}.delay-3{transition-delay:0.3s}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media(max-width:768px){
+  .work-featured,.work-featured.alt{padding:1.2rem}
+  .work-f-visual img{height:240px}
+  .info-visual{aspect-ratio:4/5}
+  .tl-block{margin-bottom:2rem}
+  section{padding:3rem 1rem}
+  .hero{padding:5rem 1.2rem 2rem}
+  .pipeline-step{min-width:120px}
+}
+</style>
+</head>
+<body>
+
+<!-- Scroll Progress -->
+<div class="scroll-bar" id="scrollBar"></div>
+
+<!-- Navigation -->
+<nav class="nav" id="nav">
+  <a href="#" class="nav-home">JIAQI</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#resume">Resume</a></li>
+    <li><a href="#works">Works</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- ============================================================
+     HERO
+     ============================================================ -->
+<section class="hero" id="home">
+  <div class="hero-bg-layer">
+    <div class="hero-orb a"></div>
+    <div class="hero-orb b"></div>
+    <div class="hero-orb c"></div>
+  </div>
+  <div class="hero-waves">
+    <div class="hero-wave-inner">
+      <svg viewBox="0 0 2880 320" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0,180 C360,110 720,250 1080,180 C1440,110 1800,230 2160,180 C2520,130 2880,200 2880,180 L2880,320 L0,320 Z" fill="#C97B5B" opacity="0.26"/>
+        <path d="M0,210 C380,140 760,280 1140,210 C1520,140 1900,260 2280,210 C2660,160 2880,230 2880,210 L2880,320 L0,320 Z" fill="#B87A7A" opacity="0.22"/>
+        <path d="M0,240 C400,170 800,310 1200,240 C1600,170 2000,290 2400,240 C2640,215 2880,260 2880,240 L2880,320 L0,320 Z" fill="#BE9D6A" opacity="0.18"/>
+        <path d="M0,265 C420,195 840,330 1260,265 C1680,200 2100,310 2520,265 C2760,240 2880,280 2880,265 L2880,320 L0,320 Z" fill="#C97B5B" opacity="0.13"/>
+        <path d="M0,285 C440,220 880,350 1320,285 C1760,220 2200,330 2640,285 C2800,260 2880,290 2880,285 L2880,320 L0,320 Z" fill="#DCC8A8" opacity="0.10"/>
+      </svg>
+    </div>
+  </div>
+  <div class="hero-inner fade-up on">
+    <span class="hero-overline">访谈制作人 · Interview Producer</span>
+    <h1>张家萁 <span class="accent"><em>Jiaqi</em> Zhang</span></h1>
+    <p class="role-line">
+      嘉宾对接 · 人物小传 · 脚本撰写 · 剪辑包装
+    </p>
+    <p class="edu-line">
+      UCL 数字媒体硕士 &nbsp;·&nbsp; 重庆大学 广播电视学士 &nbsp;·&nbsp; 坐标北京
+    </p>
+    <div class="hero-keywords">
+      <span>🎤 访谈全流程</span>
+      <span>✍️ 内容脚本</span>
+      <span>🎬 后期精包装</span>
+      <span>📋 商单执行</span>
+    </div>
+    <div class="hero-divider"></div>
+    <div class="hero-contact">
+      <span>📧 zjqzjqoo@163.com</span>
+      <span>📱 13071171180</span>
+      <span>📍 北京</span>
+    </div>
+    <div class="hero-scroll">
+      <span>SCROLL</span>
+      <div class="arr"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     ABOUT
+     ============================================================ -->
+<section id="about">
+  <div class="section-waves">
+    <div class="hero-wave-inner" style="animation-duration:16s">
+      <svg viewBox="0 0 2880 300" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0,120 C360,70 720,170 1080,120 C1440,70 1800,160 2160,120 C2520,80 2880,140 2880,120 L2880,300 L0,300 Z" fill="#C97B5B" opacity="0.20"/>
+        <path d="M0,150 C380,95 760,200 1140,150 C1520,100 1900,190 2280,150 C2660,110 2880,170 2880,150 L2880,300 L0,300 Z" fill="#B87A7A" opacity="0.16"/>
+        <path d="M0,180 C400,120 800,230 1200,180 C1600,130 2000,220 2400,180 C2640,160 2880,200 2880,180 L2880,300 L0,300 Z" fill="#BE9D6A" opacity="0.13"/>
+      </svg>
+    </div>
+  </div>
+  <div class="container">
+    <div class="info-grid">
+      <div class="info-visual fade-up">
+        <img src="../images/photo-life.jpg" alt="Jiaqi Zhang">
+        <div class="visual-tag">访谈制作人 · 内容创作者</div>
+      </div>
+      <div class="info-text fade-up delay-1">
+        <h3>关于我</h3>
+        <p class="cn-name">张家萁 &nbsp;·&nbsp; 2002.03 &nbsp;·&nbsp; 访谈制作人</p>
+        <p class="bio">
+          985本科（重庆大学·新闻传播学·广播电视专业）+ QS TOP 9 UCL 数字媒体-制作硕士。具备<span style="color:var(--terracotta)">传媒专业背景</span>与<span style="color:var(--terracotta)">编导思维</span>，擅长从选题策划到成片交付的访谈内容全流程制作。
+        </p>
+        <p class="bio">
+          核心能力围绕<strong>「发现故事」与「讲好故事」</strong>展开——前期精准识别嘉宾亮点，通过深度调研梳理人物小传；后期从1-2小时访谈素材中提炼核心议题，输出符合短视频传播规律的内容脚本，并独立完成精包装剪辑。在网易、罗德公关、新华社联合项目、人民网等机构的实习中，积累了<span style="color:var(--terracotta)">商单对接</span>、<span style="color:var(--terracotta)">跨团队沟通</span>与<span style="color:var(--terracotta)">项目统筹</span>的复合经验。
+        </p>
+        <p class="bio">
+          对内容创作有极致热爱，文字与逻辑双在线——既能写出有观点的商单脚本，也能在剪辑线上精准卡点。高情商、强同理心，善于与嘉宾建立信任，理解人，理解社会情绪。
+        </p>
+
+        <!-- 访谈全流程可视化 -->
+        <div class="pipeline-row">
+          <div class="pipeline-step">
+            <span class="ps-tag">30%</span>
+            <div class="ps-icon">🎤</div>
+            <div class="ps-title">访谈前期</div>
+            <div class="ps-desc">嘉宾识别与对接<br>人物小传调研<br>现场拍摄统筹</div>
+          </div>
+          <div class="pipeline-arrow">→</div>
+          <div class="pipeline-step">
+            <span class="ps-tag">70%</span>
+            <div class="ps-icon">✍️</div>
+            <div class="ps-title">脚本梳理</div>
+            <div class="ps-desc">1-2h访谈素材精读<br>核心故事提炼<br>短视频脚本撰写</div>
+          </div>
+          <div class="pipeline-arrow">→</div>
+          <div class="pipeline-step">
+            <div class="ps-icon">🎬</div>
+            <div class="ps-title">剪辑包装</div>
+            <div class="ps-desc">精包装剪辑<br>花字/音效/节奏<br>成片交付</div>
+          </div>
+          <div class="pipeline-arrow">→</div>
+          <div class="pipeline-step">
+            <div class="ps-icon">📋</div>
+            <div class="ps-title">商单执行</div>
+            <div class="ps-desc">甲方需求对接<br>内容脚本产出<br>项目落地交付</div>
+          </div>
+        </div>
+
+        <div class="stat-row">
+          <div class="stat-item">
+            <div class="num">4</div><div class="lbl">段内容相关实习</div>
+          </div>
+          <div class="stat-item">
+            <div class="num">6+</div><div class="lbl">影像 / 内容作品</div>
+          </div>
+          <div class="stat-item">
+            <div class="num">985</div><div class="lbl">本科 · 重庆大学</div>
+          </div>
+          <div class="stat-item">
+            <div class="num">G5</div><div class="lbl">硕士 · UCL</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     RESUME — Education + Internships
+     ============================================================ -->
+<section id="resume" style="background:var(--warm-bg);position:relative;overflow:hidden">
+  <div class="section-waves">
+    <div class="hero-wave-inner" style="animation-duration:18s">
+      <svg viewBox="0 0 2880 300" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0,100 C360,50 720,150 1080,100 C1440,50 1800,140 2160,100 C2520,60 2880,120 2880,100 L2880,300 L0,300 Z" fill="#DCC8A8" opacity="0.22"/>
+        <path d="M0,130 C380,75 760,180 1140,130 C1520,80 1900,170 2280,130 C2660,90 2880,150 2880,130 L2880,300 L0,300 Z" fill="#D4A88A" opacity="0.18"/>
+        <path d="M0,160 C400,100 800,210 1200,160 C1600,110 2000,200 2400,160 C2640,140 2880,180 2880,160 L2880,300 L0,300 Z" fill="#D4A8A8" opacity="0.14"/>
+        <path d="M0,190 C420,130 840,240 1260,190 C1680,140 2100,230 2520,190 C2760,170 2880,210 2880,190 L2880,300 L0,300 Z" fill="#D4BFA0" opacity="0.11"/>
+      </svg>
+    </div>
+  </div>
+  <div class="container" style="position:relative;z-index:1">
+    <div class="s-head fade-up">
+      <span class="num">01</span>
+      <h2>Education &amp; Experience</h2>
+      <div class="line"></div>
+      <p class="sub">传媒背景 · 编导思维 · 内容全流程</p>
+    </div>
+
+    <div class="timeline-wrap">
+
+      <div class="s-head fade-up" style="margin-bottom:2.5rem">
+        <span class="num" style="font-size:0.7rem">Education</span>
+      </div>
+
+      <!-- UCL -->
+      <div class="tl-block fade-up" style="position:relative">
+        <div class="tl-dot" style="top:0.5rem"></div>
+        <div class="tl-left">
+          <div class="tl-year">2024.09 — 2025.12</div>
+          <div class="tl-card">
+            <h4>伦敦大学学院（UCL）<span class="en" style="color:var(--ink-muted);font-size:0.85rem">· 英国 G5</span></h4>
+            <div class="where"><strong>数字媒体-制作</strong> 硕士</div>
+            <div class="desc">主修：数字媒体理论、游戏制作、数字化叙事方法、数字媒体研究方法。深入学习叙事结构与数字内容生产逻辑，为访谈内容的结构化表达奠定理论基础。</div>
+            <div class="tag-row">
+              <span>叙事结构</span><span>数字内容</span><span>研究方法</span>
+            </div>
+          </div>
+        </div>
+        <div class="tl-right" style="visibility:hidden"></div>
+      </div>
+
+      <!-- 重庆大学 -->
+      <div class="tl-block fade-up" style="position:relative">
+        <div class="tl-dot" style="top:0.5rem"></div>
+        <div class="tl-left" style="visibility:hidden"></div>
+        <div class="tl-right">
+          <div class="tl-year">2020.09 — 2024.07</div>
+          <div class="tl-card">
+            <h4>重庆大学 <span class="en" style="color:var(--ink-muted);font-size:0.85rem">· 985 高校</span></h4>
+            <div class="where"><strong>新闻传播学-广播电视专业</strong> 本科</div>
+            <div class="desc">系统学习广播电视编导、新闻采编与视频制作。新闻学院心理协会会长，善于理解人与沟通；新闻网行政部成员；学院最佳辩手，逻辑表达与即时应变能力突出。</div>
+            <div class="tag-row">
+              <span>广播电视编导</span><span>新闻采编</span><span>沟通表达</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="s-head fade-up" style="margin:3rem 0 2.5rem">
+        <span class="num" style="font-size:0.7rem">Internship Experience</span>
+      </div>
+
+      <!-- 中国搜索 × 新华社 — 重点突出（最相关） -->
+      <div class="tl-block fade-up" style="position:relative">
+        <div class="tl-dot" style="top:0.5rem"></div>
+        <div class="tl-left">
+          <div class="tl-year">2022.08 — 2022.09</div>
+          <div class="tl-card" style="border-left:3px solid var(--terracotta)">
+            <h4>中国搜索 <span class="en" style="color:var(--ink-muted);font-size:0.85rem">· China Search</span></h4>
+            <div class="where"><strong>实习编辑</strong> · 新华社联合项目</div>
+            <div class="desc">
+              <strong style="color:var(--terracotta)">🔑 与访谈制作最相关的经历：</strong><br>
+              • 联合新华社策划《中国这十年》视频项目，主导创意方案输出<br>
+              • 独立完成 <strong>1.2 万字主题资料调研</strong>（相当于人物小传/背景调研全流程）<br>
+              • 推动跨机构沟通协作，<strong>对接多方资源</strong>确保项目落地<br>
+              • 视频播放量 <strong>163 万</strong>，话题曝光超 <strong>250 万</strong><br>
+              • 日均审核 80+ 条内容，<strong>零差错率 100%</strong>
+            </div>
+            <div class="tag-row">
+              <span>深度调研</span><span>内容策划</span><span>多方对接</span><span>视频制作</span>
+            </div>
+          </div>
+        </div>
+        <div class="tl-right" style="visibility:hidden"></div>
+      </div>
+
+      <!-- 罗德公关 — 商单执行 -->
+      <div class="tl-block fade-up" style="position:relative">
+        <div class="tl-dot" style="top:0.5rem"></div>
+        <div class="tl-left" style="visibility:hidden"></div>
+        <div class="tl-right">
+          <div class="tl-year">2022.12 — 2023.04</div>
+          <div class="tl-card" style="border-left:3px solid var(--terracotta)">
+            <h4>罗德传播集团（4A）<span class="en" style="color:var(--ink-muted);font-size:0.85rem">· Ruder Finn</span></h4>
+            <div class="where"><strong>保时捷部门 · Digital PR</strong> 实习生</div>
+            <div class="desc">
+              <strong style="color:var(--terracotta)">🔑 商单执行与客户对接：</strong><br>
+              • 独立策划并统筹执行「地球日–Taycan 零驾」品牌公关活动<br>
+              • 整合<strong>媒体与 KOL 资源</strong>，完成多方协调与落地执行<br>
+              • 独立撰写 40 页年度市场分析报告，对 6 家核心竞品深度研判<br>
+              • 积累了与<strong>高端品牌甲方</strong>高效对接、理解需求并落地商单的经验
+            </div>
+            <div class="tag-row">
+              <span>商单执行</span><span>客户对接</span><span>资源整合</span><span>活动策划</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 网易 — 沟通对接 -->
+      <div class="tl-block fade-up" style="position:relative">
+        <div class="tl-dot" style="top:0.5rem"></div>
+        <div class="tl-left">
+          <div class="tl-year">2023.08 — 2023.11</div>
+          <div class="tl-card">
+            <h4>网易公司 <span class="en" style="color:var(--ink-muted);font-size:0.85rem">· NetEase</span></h4>
+            <div class="where"><strong>策略运营</strong> 实习生</div>
+            <div class="desc">
+              • 独立对接维护 <strong>20+ 个外部合作渠道</strong>，制定 10 余类标准化沟通模板<br>
+              • 促成业务合作 2200 余单，展现出色的<strong>对外沟通与关系维护能力</strong><br>
+              • 牵头撰写 30 页项目专项总结报告，建立数据监测机制推动效能提升 6%
+            </div>
+            <div class="tag-row">
+              <span>渠道对接</span><span>沟通协调</span><span>数据分析</span>
+            </div>
+          </div>
+        </div>
+        <div class="tl-right" style="visibility:hidden"></div>
+      </div>
+
+      <!-- 人民网 — 内容全流程 -->
+      <div class="tl-block fade-up" style="position:relative">
+        <div class="tl-dot" style="top:0.5rem"></div>
+        <div class="tl-left" style="visibility:hidden"></div>
+        <div class="tl-right">
+          <div class="tl-year">2022.01 — 2022.05</div>
+          <div class="tl-card">
+            <h4>人民网 <span class="en" style="color:var(--ink-muted);font-size:0.85rem">· People.cn</span></h4>
+            <div class="where"><strong>新媒体运营</strong> 实习生</div>
+            <div class="desc">
+              • 负责公众号「此人有品」<strong>内容全流程</strong>（选题→制作→文案→排版→发布）<br>
+              • 独立完成 20+ 篇原创内容，互动率提升 18%<br>
+              • 锻炼了从<strong>选题判断到成品输出</strong>的完整内容生产能力
+            </div>
+            <div class="tag-row">
+              <span>全流程内容</span><span>选题策划</span><span>原创写作</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     WORKS — 以访谈制作人视角重新解读
+     ============================================================ -->
+<section id="works">
+  <div class="section-waves" style="opacity:0.6">
+    <div class="hero-wave-inner" style="animation-duration:20s">
+      <svg viewBox="0 0 2880 300" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0,80 C300,40 600,140 900,80 C1200,20 1500,130 1800,80 C2100,30 2400,120 2700,80 C2880,60 2880,100 2880,80 L2880,300 L0,300 Z" fill="#D4A88A" opacity="0.25"/>
+        <path d="M0,110 C320,65 640,170 960,110 C1280,50 1600,160 1920,110 C2240,60 2560,150 2880,110 L2880,300 L0,300 Z" fill="#D4A8A8" opacity="0.20"/>
+        <path d="M0,140 C340,90 680,200 1020,140 C1360,80 1700,190 2040,140 C2380,90 2720,180 2880,140 L2880,300 L0,300 Z" fill="#D4BFA0" opacity="0.16"/>
+        <path d="M0,170 C360,115 720,230 1080,170 C1440,110 1800,220 2160,170 C2520,120 2880,200 2880,170 L2880,300 L0,300 Z" fill="#C9B380" opacity="0.12"/>
+      </svg>
+    </div>
+  </div>
+  <div class="container">
+    <div class="s-head fade-up">
+      <span class="num">02</span>
+      <h2>Selected Works</h2>
+      <div class="line"></div>
+      <p class="sub">用编导思维审视每一个项目——选题、结构、叙事、剪辑</p>
+    </div>
+
+    <!-- ===== Category: 内容策划 & 视频制作 ===== -->
+    <div class="work-category fade-up">
+      <div class="work-cat-title">🎬 内容策划 &amp; 视频制作 · 访谈相关能力</div>
+
+      <!-- 《中国这十年》— 最相关项目，放在首位 -->
+      <div class="work-featured">
+        <div class="work-f-visual" style="background:linear-gradient(135deg,#1a1a2e,#16213e,#0f3460);display:flex;align-items:center;justify-content:center;min-height:340px">
+          <div style="text-align:center;color:var(--sand-light)">
+            <div style="font-size:3rem;margin-bottom:0.5rem">📰</div>
+            <div style="font-size:1.2rem;letter-spacing:3px;margin-bottom:0.3rem">中国这十年</div>
+            <div style="font-size:0.82rem;opacity:0.6;letter-spacing:2px">中国搜索 × 新华社 联合策划</div>
+          </div>
+        </div>
+        <div class="work-f-info">
+          <span class="wnum">01</span>
+          <h3>《中国这十年》视频项目</h3>
+          <span class="wrole">内容策划 · 深度调研 · 视频制作 · 新华社联合项目</span>
+          <p class="wdesc">
+            在中国搜索实习期间，与新华社联合策划《中国这十年》视频项目。主导创意方案输出，独立完成 1.2 万字主题背景资料调研与整理——这一过程与访谈节目的<strong>嘉宾前采与人物小传</strong>高度相似，需要从海量信息中捕捉最具传播力的故事线索和议题观点。
+          </p>
+          <div class="whighlight">
+            <strong>🟡 访谈制作人视角：</strong>1.2万字的深度调研能力 = 访谈前的人物小传与背景研究；跨机构协作 = 嘉宾团队对接能力；163万播放量证明了对<strong>内容传播规律</strong>的把握。
+          </div>
+          <div class="work-f-tags">
+            <span>深度调研</span><span>选题策划</span><span>人物/主题资料</span><span>机构协作</span><span>163万播放</span><span>内容传播</span>
+          </div>
+          <div class="btn-group">
+            <a href="https://h5.video.weibo.com/show/1034:4838991762227266" class="btn btn-primary" target="_blank">🔗 在微博观看</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- AV Essay — 视听叙事与剪辑 -->
+      <div class="work-featured alt">
+        <div class="work-f-visual">
+          <video controls poster="../images/poster-avessay.svg">
+            <source src="../av-essay.mp4" type="video/mp4">
+          </video>
+          <span class="work-f-badge">🎬 UCL 课程作品</span>
+        </div>
+        <div class="work-f-info">
+          <span class="wnum">02</span>
+          <h3>Audiovisual Essay · 视听论文</h3>
+          <span class="wrole">叙事剪辑 · 影像论证 · 独立创作</span>
+          <p class="wdesc">
+            以影像作为学术表达媒介的视听论文。通过精心编排的 archive 画面、原创拍摄与配音叙事，将抽象论点转化为具有<strong>情感张力与逻辑说服力</strong>的视听体验。这一能力直接迁移至访谈后期——从冗长的对话中识别核心观点，用影像语言构建叙事弧线。
+          </p>
+          <div class="whighlight">
+            <strong>🟡 访谈制作人视角：</strong>将大量素材（archive footage + 原创拍摄 + 配音）组织为有逻辑、有节奏的叙事短片的<strong>剪辑思维</strong>，正是从1-2小时访谈中提炼核心故事并精包装的核心能力。
+          </div>
+          <div class="work-f-tags">
+            <span>叙事剪辑</span><span>素材组织</span><span>视听语言</span><span>观点提炼</span><span>节奏把控</span>
+          </div>
+          <div class="btn-group">
+            <a href="../av-essay.mp4" class="btn btn-primary" target="_blank">▶ 观看完整影片</a>
+            <a href="../AV-Essay.pdf" class="btn btn-outline" target="_blank">📄 查看文稿</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- POP Ad — 商单执行 -->
+      <div class="work-featured">
+        <div class="work-f-visual">
+          <video controls poster="../images/poster-pop.svg">
+            <source src="../pop-ad.mp4" type="video/mp4">
+          </video>
+          <span class="work-f-badge">📺 商业广告</span>
+        </div>
+        <div class="work-f-info">
+          <span class="wnum">03</span>
+          <h3>POP 商业广告 · 商单全流程</h3>
+          <span class="wrole">商单执行 · 独立全流程 · 创意到成片</span>
+          <p class="wdesc">
+            品牌 POP 广告创意作品，完整经历了<strong>「理解甲方需求 → 创意构思 → 脚本撰写 → 拍摄执行 → 后期精包装 → 成片交付」</strong>的全流程。在有限时长内通过精准的视觉语言与节奏把控传递品牌核心信息，直接对应商单执行的完整链路。
+          </p>
+          <div class="whighlight">
+            <strong>🟡 访谈制作人视角：</strong>全流程独立交付商单的能力——从需求对接到成片输出，与访谈节目中"商单执行：产出内容脚本，和甲方高效对接，落地商单"的职责完全吻合。
+          </div>
+          <div class="work-f-tags">
+            <span>商单全流程</span><span>脚本撰写</span><span>后期精包装</span><span>甲方对接</span><span>品牌内容</span>
+          </div>
+          <div class="btn-group">
+            <a href="../pop-ad.mp4" class="btn btn-primary" target="_blank">▶ 观看作品</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== Category: 叙事设计 ===== -->
+    <div class="work-category fade-up">
+      <div class="work-cat-title">📖 叙事结构 &amp; 故事设计 · 底层能力</div>
+
+      <!-- 星际迷航 — 叙事结构 -->
+      <div class="work-featured alt">
+        <div class="work-f-visual">
+          <img src="../images/project1-2.jpg" alt="星际迷航">
+          <span class="work-f-badge">🎓 毕业设计</span>
+        </div>
+        <div class="work-f-info">
+          <span class="wnum">04</span>
+          <h3>星际迷航 · Star Trek</h3>
+          <span class="wrole">互动叙事游戏 · 毕业设计 · 独立开发</span>
+          <p class="wdesc">
+            使用 Twine / Harlowe 引擎独立开发的互动叙事游戏。玩家每个选择引导故事走向不同分支——在非线性叙事中重构故事的可能性。这一创作经历训练了对<strong>叙事结构、故事节奏和受众参与感</strong>的精准把控。
+          </p>
+          <div class="whighlight">
+            <strong>🟡 访谈制作人视角：</strong>互动叙事设计 = 对「讲什么故事」「怎么讲故事」「在哪里设置钩子」的结构化思考——与访谈内容脚本梳理中对<strong>叙事节奏和信息密度</strong>的把控一脉相承。
+          </div>
+          <div class="work-f-tags">
+            <span>叙事结构</span><span>节奏设计</span><span>故事分支</span><span>受众参与</span>
+          </div>
+          <div class="btn-group">
+            <a href="../project1-detail.html" class="btn btn-primary" target="_blank">▶ 体验作品</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Vow — 情感叙事 -->
+      <div class="work-featured">
+        <div class="work-f-visual">
+          <video controls poster="../images/poster-vow.svg">
+            <source src="../game-design.mp4" type="video/mp4">
+          </video>
+          <span class="work-f-badge">👥 UCL 课程项目</span>
+        </div>
+        <div class="work-f-info">
+          <span class="wnum">05</span>
+          <h3>Vow · 情感叙事游戏设计</h3>
+          <span class="wrole">叙事设计 · 团队协作 · UCL 课程项目</span>
+          <p class="wdesc">
+            聚焦叙事驱动与情感选择的游戏设计项目。从概念构思到完整设计文档，涵盖叙事机制、用户情感体验弧线与视觉呈现方案。团队密切协作，将抽象的情感概念转化为可落地的叙事设计——训练了对<strong>「人物情感逻辑」</strong>的敏感度。
+          </p>
+          <div class="whighlight">
+            <strong>🟡 访谈制作人视角：</strong>理解人物的情感动机与叙事弧线，与访谈中<strong>「理解人、理解社会情绪」「建立情感共鸣」</strong>的要求直接对应——好的访谈制作人需要像叙事设计师一样思考嘉宾的故事线。
+          </div>
+          <div class="work-f-tags">
+            <span>情感叙事</span><span>人物弧线</span><span>团队协作</span><span>设计文档</span>
+          </div>
+          <div class="btn-group">
+            <a href="../game-design.mp4" class="btn btn-primary" target="_blank">▶ 观看演示视频</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============================================================
+     SKILLS — 以访谈制作人为核心
+     ============================================================ -->
+<section id="skills">
+  <div class="section-waves" style="opacity:0.5">
+    <div class="hero-wave-inner" style="animation-duration:15s;animation-direction:reverse">
+      <svg viewBox="0 0 2880 300" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0,60 C360,30 720,120 1080,60 C1440,0 1800,100 2160,60 C2520,20 2880,80 2880,60 L2880,300 L0,300 Z" fill="#DCC8A8" opacity="0.18"/>
+        <path d="M0,90 C380,55 760,150 1140,90 C1520,30 1900,130 2280,90 C2660,50 2880,110 2880,90 L2880,300 L0,300 Z" fill="#D4BFA0" opacity="0.14"/>
+        <path d="M0,120 C400,80 800,180 1200,120 C1600,60 2000,160 2400,120 C2640,100 2880,140 2880,120 L2880,300 L0,300 Z" fill="#C9B380" opacity="0.10"/>
+      </svg>
+    </div>
+  </div>
+  <div class="container">
+    <div class="s-head fade-up">
+      <span class="num">03</span>
+      <h2>Skills &amp; Tools</h2>
+      <div class="line"></div>
+      <p class="sub">访谈制作人的核心能力矩阵</p>
+    </div>
+
+    <!-- 访谈前期 -->
+    <div class="skill-group fade-up">
+      <div class="sg-title">🎤 访谈前期 · Pre-Production</div>
+      <div class="sg-sub">嘉宾识别 · 人物调研 · 选题判断 · 拍摄统筹</div>
+      <div class="skills-marquee">
+        <span class="skill-pill">嘉宾对接与沟通</span>
+        <span class="skill-pill">人物小传撰写</span>
+        <span class="skill-pill">背景资料深度调研</span>
+        <span class="skill-pill">选题策划与判断</span>
+        <span class="skill-pill">社会情绪感知</span>
+        <span class="skill-pill">热点敏感度</span>
+        <span class="skill-pill">现场拍摄统筹</span>
+        <span class="skill-pill">采访提纲设计</span>
+      </div>
+    </div>
+
+    <!-- 访谈后期 -->
+    <div class="skill-group fade-up delay-1">
+      <div class="sg-title">✍️ 内容脚本 · Script &amp; Structure</div>
+      <div class="sg-sub">素材精读 · 观点提炼 · 脚本撰写 · 短视频适配</div>
+      <div class="skills-marquee">
+        <span class="skill-pill">长素材精读与标注</span>
+        <span class="skill-pill">核心故事线提炼</span>
+        <span class="skill-pill">议题观点识别</span>
+        <span class="skill-pill">短视频内容脚本</span>
+        <span class="skill-pill">商单脚本撰写</span>
+        <span class="skill-pill">叙事结构设计</span>
+        <span class="skill-pill">文案撰写</span>
+        <span class="skill-pill">甲方需求对接</span>
+      </div>
+    </div>
+
+    <!-- 后期制作 -->
+    <div class="skill-group fade-up delay-2">
+      <div class="sg-title">🎬 后期制作 · Post-Production</div>
+      <div class="sg-sub">精包装剪辑 · 节奏把控 · 短视频优化</div>
+      <div class="skills-marquee">
+        <span class="skill-pill">Premiere Pro (PR)</span>
+        <span class="skill-pill">剪映</span>
+        <span class="skill-pill">Photoshop (PS)</span>
+        <span class="skill-pill">视频精包装</span>
+        <span class="skill-pill">花字/字幕设计</span>
+        <span class="skill-pill">音效/BGM 搭配</span>
+        <span class="skill-pill">节奏与情绪把控</span>
+        <span class="skill-pill">短视频格式适配</span>
+      </div>
+    </div>
+
+    <!-- 综合素质 -->
+    <div class="skill-group fade-up delay-3">
+      <div class="sg-title">📋 专业素养 · Professional Skills</div>
+      <div class="sg-sub">沟通 · 抗压 · 网感 · 全流程</div>
+      <div class="skills-marquee">
+        <span class="skill-pill">英语（工作语言）</span>
+        <span class="skill-pill">高情商沟通</span>
+        <span class="skill-pill">嘉宾信任建立</span>
+        <span class="skill-pill">Office 全系</span>
+        <span class="skill-pill">数据分析</span>
+        <span class="skill-pill">项目统筹管理</span>
+        <span class="skill-pill">跨团队协作</span>
+        <span class="skill-pill">强抗压能力</span>
+        <span class="skill-pill">网感与热点追踪</span>
+        <span class="skill-pill">内容全流程</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============================================================
+     CONTACT
+     ============================================================ -->
+<section id="contact">
+  <div class="section-waves" style="opacity:0.5">
+    <div class="hero-wave-inner" style="animation-duration:16s">
+      <svg viewBox="0 0 2880 300" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0,90 C360,50 720,150 1080,90 C1440,30 1800,140 2160,90 C2520,40 2880,110 2880,90 L2880,300 L0,300 Z" fill="#D4BFA0" opacity="0.18"/>
+        <path d="M0,120 C380,75 760,180 1140,120 C1520,60 1900,170 2280,120 C2660,80 2880,140 2880,120 L2880,300 L0,300 Z" fill="#C9B380" opacity="0.13"/>
+      </svg>
+    </div>
+  </div>
+  <div class="container">
+    <div class="s-head fade-up">
+      <span class="num">04</span>
+      <h2>Get in Touch</h2>
+      <div class="line"></div>
+      <p class="sub">期待加入团队，用内容讲好每一个故事</p>
+    </div>
+
+    <div class="contact-card fade-up delay-1">
+      <p style="color:var(--ink-soft);margin-bottom:1.5rem;letter-spacing:1px;font-size:0.9rem">
+        访谈制作人 · 全流程内容创作者<br>
+        嘉宾对接 → 脚本撰写 → 剪辑包装 → 商单交付
+      </p>
+      <a href="mailto:zjqzjqoo@163.com" class="email">✉ zjqzjqoo@163.com</a>
+      <p class="phone">📱 13071171180 &nbsp;|&nbsp; 📍 北京</p>
+      <div class="contact-links">
+        <a href="mailto:zjqzjqoo@163.com" class="btn btn-primary">发送邮件</a>
+        <a href="#works" class="btn btn-outline">浏览作品</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     FOOTER
+     ============================================================ -->
+<footer>
+  <div class="fline"></div>
+  <p>Jiaqi Zhang · 访谈制作人 · Interview Producer</p>
+  <p style="margin-top:0.5rem;font-size:0.72rem;color:var(--sand)">985 本科 · QS TOP 9 UCL 硕士 · 嘉宾对接—脚本撰写—剪辑包装 全流程能力</p>
+</footer>
+
+<!-- Lightbox -->
+<div class="lb" id="lb" onclick="clb()">
+  <span class="close">&times;</span>
+  <img src="" alt="" id="lbImg">
+</div>
+
+<script>
+// Scroll progress
+window.addEventListener('scroll',()=>{
+  const p=(scrollY/(document.documentElement.scrollHeight-innerHeight))*100
+  document.getElementById('scrollBar').style.width=p+'%'
+  document.getElementById('nav').classList.toggle('on',scrollY>60)
+})
+
+// Scroll reveal
+const obs=new IntersectionObserver((es)=>{
+  es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('on')})
+},{threshold:0.12,rootMargin:'0px 0px -40px 0px'})
+document.querySelectorAll('.fade-up').forEach(el=>obs.observe(el))
+setTimeout(()=>document.querySelectorAll('.fade-up').forEach(el=>{
+  if(el.getBoundingClientRect().top<innerHeight)el.classList.add('on')
+}),150)
+
+// Lightbox
+function lb(src){document.getElementById('lbImg').src=src;document.getElementById('lb').classList.add('on');document.body.style.overflow='hidden'}
+function clb(){document.getElementById('lb').classList.remove('on');document.body.style.overflow=''}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')clb()})
+
+// Smooth scroll
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click',function(e){
+    const t=document.querySelector(this.getAttribute('href'))
+    if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth',block:'start'})}
+  })
+})
+</script>
+
+</body>
+</html>
